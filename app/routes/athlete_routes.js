@@ -58,15 +58,15 @@ router.patch('/athletes/:id', requireToken, removeBlanks, (req, res, next) => {
 	delete req.body.athlete.owner
 
 	Athlete.findById(req.params.id)
-		.then(handle404)
-		.then((athlete) => {
-			requireOwnership(req, athlete)
-			return athlete.updateOne(req.body.athlete)
-		})
-		// if that succeeded, return 204 and no JSON
-		.then(() => res.sendStatus(204))
-		// if an error occurs, pass it to the handler
-		.catch(next)
+        .then(handle404)
+        .then((athlete) => {
+            requireOwnership(req, athlete)
+            return athlete.updateOne(req.body.athlete)
+        })
+        // if that succeeded, return 204 and no JSON
+        .then(() => res.sendStatus(204))
+        // if an error occurs, pass it to the handler
+        .catch(next)
 })
 
 // DESTROY
