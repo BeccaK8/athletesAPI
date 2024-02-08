@@ -25,7 +25,7 @@ const athleteSchema = new mongoose.Schema(
 			required: true,
 			default: true
 		},
-		createdBy: {
+		owner: {
 			type: mongoose.Schema.Types.ObjectId,
 			ref: 'User',
 		},

@@ -14,7 +14,7 @@ const startAthletes = [
 
 mongoose.connect(db, {useNewUrlParser: true})
     .then(() => {
-        Athlete.deleteMany({ createdBy: null })
+        Athlete.deleteMany({ owner: null })
             .then(deletedAthletes => {
                 console.log('deleted athletes in seed script: ', deletedAthletes);
 
