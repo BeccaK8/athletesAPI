@@ -46,7 +46,12 @@ Athlete is comprised of the following:
         type: Boolean,
         required: true,
         default: true
-    }
+    },
+    createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+    },
 ```
 
 
