@@ -14,7 +14,7 @@ const router = express.Router()
 // INDEX
 // GET /athletes
 router.get('/athletes', (req, res, next) => {
-	Athlete.find()
+	Athlete.find().sort( { "sport": 1, "name": 1 })
 		.then((athletes) => {
 			return athletes.map((athlete) => athlete.toObject())
 		})

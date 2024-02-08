@@ -32,7 +32,17 @@ const athleteSchema = new mongoose.Schema(
 	},
 	{
 		timestamps: true,
+        toObject: { virtuals: true },
+        toJSON: { virtuals: true },
 	}
 )
+
+athleteSchema.virtual('fullTitle').get(function() {
+	return `${this.name} the ${this.sport} Player`
+})
+
+athleteSchema.virtual('status').get(function() {
+	return (this.active) ? 'Still playing' : 'Retired (and hopefully living the good life!)'
+})
 
 module.exports = mongoose.model('Athlete', athleteSchema)
