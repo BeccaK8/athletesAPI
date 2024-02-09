@@ -56,15 +56,20 @@ router.patch('/athletes/:id', requireToken, removeBlanks, (req, res, next) => {
 	// if the client attempts to change the `owner` property by including a new
 	// owner, prevent that by deleting that key/value pair
 	delete req.body.athlete.owner
-
+    
 	Athlete.findById(req.params.id)
         .then(handle404)
         .then((athlete) => {
             requireOwnership(req, athlete)
+
+            // add back nullable fields in order to force them to clear out
+            if (!req.body.athlete.currentTeam) req.body.athlete.currentTeam = ''
+            if (!req.body.athlete.jerseyNumber) req.body.athlete.jerseyNumber = null
+
             return athlete.updateOne(req.body.athlete)
         })
         // if that succeeded, return 204 and no JSON
-        .then(() => res.sendStatus(204))
+        .then((athlete) => res.sendStatus(204))
         // if an error occurs, pass it to the handler
         .catch(next)
 })
